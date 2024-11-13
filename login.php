@@ -43,9 +43,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log in</title>
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/makeupshop.css">
 </head>
 <body>
-<form action="" method="post">
+	<div class="formDiv">
+<form action="" method="post" class="form">
 				<h2 form__title>Log In</h2>
 
 				<?php if(isset($error)): ?>
@@ -70,5 +73,6 @@
 					<input type="checkbox" id="rememberMe"><label for="rememberMe" class="labelInline">Remember me</label>
 				</div>
 			</form>
+			</div>
 </body>
 </html>
