@@ -3,6 +3,7 @@
 :root {
     --black: #212121;
     --white: #ffffff;
+    --offwhite: #eeeeee;
     --brown: #5F4444;
     --darkPink: #AF3264;
     --pink: #ff87c7;
@@ -10,12 +11,12 @@
     --babyPink: #ffdcdc;
 
 
-    --h1: 28px;
-    --h2: 24px;
+    --h1: 40px;
+    --h2: 32px;
     --h3: 20px;
     --text: 12px;
     --minitext: 8px;
-    --btn: 28px;
+    --btn: 24px;
   }
 
 * {
@@ -50,7 +51,7 @@ p{
 }
 
 .formDiv{
-  background-color: var(--babyPink);
+  background-color: var(--offwhite);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -72,6 +73,32 @@ p{
   max-width: 30%;
   height: 30%;
   min-height: 300px;
-  padding: 5% 10%;
+  padding: 10% 5% 10% 2%;
   border-radius: 16px;
+}
+
+.btn{
+margin-top: 12px;
+background-color: var(--pink);
+color: white;
+text-decoration: none;
+border: none;
+font-size: var(--btn);
+font-weight: bold;
+padding: 5% 10%;
+border-radius: 8px;
+}
+
+.formField{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  margin: 2px;
+}
+
+.formFieldBottom{
+  display: flex;
+  align-content: space-between;
 }
