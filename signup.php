@@ -22,8 +22,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create your account</title>
+    <link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/makeupshop.css">
 </head>
 <body>
+<div class="formDiv">
     <form action="" method="post">
         <h2 form__title>Sign Up</h2>
 
@@ -44,9 +47,11 @@
             <input type="password" name="password">
         </div>
 
-        <div class="formField">
+        <div class="formField formFieldBottom">
             <input type="submit" value="Sign up" class="btn btn--primary">	
         </div>
+        <div class="formField link"><a href="login.php">Log in</a></div>
     </form>
+        </div>
 </body>
 </html>
