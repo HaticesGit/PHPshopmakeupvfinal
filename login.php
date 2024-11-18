@@ -72,7 +72,7 @@
 					<input type="submit" value="Sign in" class="btn btn--primary">	
 					<input type="checkbox" id="rememberMe"><label for="rememberMe" class="labelInline">Remember me</label>
 				</div>
-				<div class="formField"><a href="signup.php">Sign up</a></div>
+				<div class="formField link"><a href="signup.php">Sign up</a></div>
 
 			</form>
 			</div>

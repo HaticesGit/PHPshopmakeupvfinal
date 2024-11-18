@@ -102,3 +102,8 @@ border-radius: 8px;
   display: flex;
   align-content: space-between;
 }
+
+.link a{
+  text-decoration: none;
+  color: var(--brown);
+}
