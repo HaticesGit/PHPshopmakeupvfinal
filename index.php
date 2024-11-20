@@ -1,5 +1,6 @@
 <?php
     namespace Hatice\makeupshop;
+    $pathToSSL = __DIR__ . "/CA.pem";
     session_start(); //elke pagina da je wilt checke
     if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
     header("Location: login.php");
