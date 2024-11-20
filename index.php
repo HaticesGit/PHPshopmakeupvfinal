@@ -1,16 +1,20 @@
 <?php
-    namespace Hatice\makeupshop;
-    $pathToSSL = __DIR__ . "/CA.pem";
-    session_start(); //elke pagina da je wilt checke
-    if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
+namespace Hatice\makeupshop;
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+include_once(__DIR__ . "/classes/Db.php");
+use Hatice\makeupshop\Db;
+session_start(); //elke pagina da je wilt checke
+if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
     header("Location: login.php");
-    }
+}
+$pathToSSL = __DIR__ . "/CA.pem";
     
-    $conn = Db::getConnection(); //hier was PDO
-    //select * from products and fetch as array
-    $statement = $conn->prepare("SELECT * FROM products");
-    $statement->execute();
-    $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+$conn = Db::getConnection(); //hier was PDO
+//select * from products and fetch as array
+$statement = $conn->prepare("SELECT * FROM products");
+$statement->execute();
+$products = $statement->fetchAll(\PDO::FETCH_ASSOC);
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
