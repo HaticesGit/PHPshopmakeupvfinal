@@ -12,6 +12,7 @@ class Product{
     private $description;
     private $stock;
     private $variation;
+    private $category_id;
 
 
     /**
@@ -153,16 +154,36 @@ class Product{
 
         return $this;
     }
+    /**
+     * Get the value of category_id
+     */ 
+    public function getCategory_id()
+    {
+        return $this->category_id;
+    }
+
+    /**
+     * Set the value of category_id
+     *
+     * @return  self
+     */ 
+    public function setCategory_id($category_id)
+    {
+        $this->category_id = $category_id;
+
+        return $this;
+    }
 
     public function save(){
         $conn = Db::getConnection();
-        $statement = $conn->prepare('INSERT INTO products (title, price, img, descr, stock, variation) VALUES (:title , :price, :img, :descr, :stock, :variation)');
+        $statement = $conn->prepare('INSERT INTO products (title, price, img, descr, stock, variation, category_id) VALUES (:title , :price, :img, :descr, :stock, :variation, :category_id)');
         $statement->bindValue(":title", $this->title);
         $statement->bindValue(":price", $this->price);
         $statement->bindValue(":img", $this->img);
         $statement->bindValue(":descr", $this->description);
         $statement->bindValue(":stock", $this->stock);
         $statement->bindValue(":variation", $this->variation);
+        $statement->bindValue(":category_id", $this->category_id);
         $result = $statement->execute();
         $successMessage = true;
 
@@ -177,9 +198,13 @@ class Product{
     }
 
     public static function getAll(){ //new
-        $conn = Db::getConnection();
-        $statement = $conn->query('SELECT * FROM products');
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
-
+        try {
+            //$conn = Db::getConnection();
+            $pdo = new \PDO('mysql:host=localhost;dbname=makeupshop', 'root', 'root');
+            $statement = $pdo->query('SELECT * FROM products');
+            return $statement->fetchAll(\PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
+            echo 'Connection failed: ' . $e->getMessage();
+        }
     }
 }

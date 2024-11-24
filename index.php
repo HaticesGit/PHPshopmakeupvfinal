@@ -34,7 +34,10 @@ $products = $statement->fetchAll(\PDO::FETCH_ASSOC);
         </div>
         <?php foreach($products as $product): ?>
         <article>
-            <h2><?php echo $product["title"] . " " . $product["price"]; ?> </h2>
+            <h2><?php
+    echo '<h2>' . $product['title'] . '</h2>';
+    echo '<p>' . $product['price'] . '</p>';
+    echo '<img src="' . $product['img'] . '" alt="' . $product['title'] . '">'; ?> </h2>
         </article>
         <?php endforeach; ?>
     </article>

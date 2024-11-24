@@ -100,6 +100,10 @@ if (isset($_POST['title']) && isset($_POST['price'])) {
             <label for="variation">Product Variation:</label>
             <input type="text" name="variation" required>
         </div>
+        <div>
+            <label for="category">Product Category:</label>
+            <input type="text" name="category_id" required>
+        </div>
 
         <div>
             <input type="submit" value="Add Product">
