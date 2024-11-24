@@ -1,5 +1,9 @@
 <?php
-include_once(__DIR__ . "./Db.php"); 
+namespace Hatice\makeupshop;
+use Hatice\makeupshop\Db;
+use Hatice\makeupshop\Product;
+//var_dump(class_exists('Hatice\makeupshop\Db'));
+// include_once(__DIR__ . "./Db.php"); 
 class Product{
     private $id;
     private $title;
@@ -152,19 +156,29 @@ class Product{
 
     public function save(){
         $conn = Db::getConnection();
-        $statement = $conn->prepare('INSERT INTO product (title, price, img, description, stock, variation) VALUES (:title , :price, :img, :description, :stock, :variation)');
-        $statement->bindValue("title", $this->title);
-        $statement->bindValue("price", $this->price);
-        $statement->bindValue("img", $this->img);
-        $statement->bindValue("description", $this->description);
-        $statement->bindValue("stock", $this->stock);
-        $statement->bindValue("variation", $this->variation);
-        $statement->execute();
+        $statement = $conn->prepare('INSERT INTO products (title, price, img, descr, stock, variation) VALUES (:title , :price, :img, :descr, :stock, :variation)');
+        $statement->bindValue(":title", $this->title);
+        $statement->bindValue(":price", $this->price);
+        $statement->bindValue(":img", $this->img);
+        $statement->bindValue(":descr", $this->description);
+        $statement->bindValue(":stock", $this->stock);
+        $statement->bindValue(":variation", $this->variation);
+        $result = $statement->execute();
+        $successMessage = true;
+
+        if ($result) {
+            echo "yippee";
+        } else {
+            echo "o no";
+        }
+
+        return $result;
+
     }
 
     public static function getAll(){ //new
         $conn = Db::getConnection();
-        $statement = $conn->query('SELECT * FROM users');
+        $statement = $conn->query('SELECT * FROM products');
         return $statement->fetchAll(PDO::FETCH_ASSOC);
 
     }

@@ -1,5 +1,19 @@
 <?php
-session_start();
+require_once(__DIR__.'/bootstrap.php');
+var_dump(file_exists(__DIR__ . "/classes/Product.php")); // Should output: bool(true)
+var_dump(class_exists("Hatice\\makeupshop\\Product"));
+
+// ini_set('display_errors', 1);
+// error_reporting(E_ALL);
+// include_once(__DIR__."\classes\Db.php");
+// include_once(__DIR__."\classes\Product.php");
+
+use Hatice\makeupshop\Db;
+use Hatice\makeupshop\Product;
+
+$allProducts = Product::getAll();
+
+var_dump($allProducts);
 
 if(!empty($_POST)){
     try {
@@ -7,16 +21,18 @@ if(!empty($_POST)){
     $product->setTitle($_POST['title']);
     $product->setPrice($_POST['price']);
     $product->setImg($_POST['img']);
-    $product->setDescription($_POST['description']);
+    $product->setDescription($_POST['descr']);
     $product->setStock($_POST['stock']);
     $product->setVariation($_POST['variation']);
     
-
-    $product->save();
+    
+    $result = $product->save();
+    echo $result;
     $success = "user saved!";
 }
 catch(\Throwable $th){
     //throw $th;
+    echo "dfk";
     $error = $th->getMessage();
 }
 }
@@ -52,8 +68,12 @@ if (isset($_POST['title']) && isset($_POST['price'])) {
 
     <!-- Display success message if set -->
     <?php if (isset($successMessage)): ?>
-        <p><?php echo $successMessage; ?></p>
-    <?php endif; ?>
+    <p style="color: green;"><?php echo $successMessage; ?></p>
+<?php endif; ?>
+
+<?php if (isset($error)): ?>
+    <p style="color: red;"><?php echo $error; ?></p>
+<?php endif; ?>
 
     <form action="addProduct.php" method="post">
         <div>
@@ -70,7 +90,7 @@ if (isset($_POST['title']) && isset($_POST['price'])) {
         </div>
         <div>
             <label for="description">Product Description:</label>
-            <input type="text" name="description" required>
+            <input type="text" name="descr" required>
         </div>
         <div>
             <label for="stock">Product Stock:</label>

@@ -2,7 +2,7 @@
     "name": "hatice/makeupshop",
     "autoload": {
         "psr-4": {
-            "Hatice\\Makeupshop\\": "hatice/makeupshop/"
+            "Hatice\\Makeupshop\\": "classes/"
         }
     },
     "require": {}
