@@ -214,9 +214,17 @@ class Product{
             $statement = $pdo->prepare('SELECT * FROM products WHERE category_id = :category_id');
             $statement->bindParam(':category_id', $category_id);
             $statement->execute();
-            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            return $statement->fetchAll(\PDO::FETCH_ASSOC);
         } catch (\PDOException $e) {
             echo 'Connection failed: ' . $e->getMessage();
         }
+
+        
+    }
+    public function getNewProducts() {
+        $conn = Db::getConnection();
+        $statement = $conn->prepare("SELECT * FROM products ORDER BY dateAdded DESC LIMIT 10");
+        $statement->execute();
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
 }

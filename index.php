@@ -3,7 +3,9 @@ namespace Hatice\makeupshop;
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 include_once(__DIR__ . "/classes/Db.php");
+include_once(__DIR__ . "/classes/Product.php");
 use Hatice\makeupshop\Db;
+use Hatice\makeupshop\Product;
 session_start(); //elke pagina da je wilt checke
 if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
     header("Location: login.php");
@@ -15,6 +17,9 @@ $conn = Db::getConnection(); //hier was PDO
 $statement = $conn->prepare("SELECT * FROM products");
 $statement->execute();
 $products = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+$product = new Product();
+$newProducts = $product->getNewProducts();
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,6 +32,13 @@ $products = $statement->fetchAll(\PDO::FETCH_ASSOC);
     <article class="display">
         <div class="newsfeed">
             <h3>New!</h3>
+            <?php foreach ($newProducts as $product): ?>
+            <li>
+                <h2><?php echo ($product['title']); ?></h2>
+                <p><?php echo ($product['img']); ?></p>
+                <p>Price: <?php echo htmlspecialchars($product['price']); ?></p>
+            </li>
+        <?php endforeach; ?>
             <div class="newsfeedInfo">
             <h3>Your fave blush just got a bronzer bestie!</h3>
             <p>Get even more long-lasting Camo color with NEW Camo Liquid Bronzer & Contour + 3 NEW shades of Liquid Blush. Only $7 each.</p>

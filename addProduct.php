@@ -1,7 +1,7 @@
 <?php
 require_once(__DIR__.'/bootstrap.php');
-var_dump(file_exists(__DIR__ . "/classes/Product.php")); // Should output: bool(true)
-var_dump(class_exists("Hatice\\makeupshop\\Product"));
+//var_dump(file_exists(__DIR__ . "/classes/Product.php")); // Should output: bool(true)
+//var_dump(class_exists("Hatice\\makeupshop\\Product"));
 
 // ini_set('display_errors', 1);
 // error_reporting(E_ALL);
@@ -13,7 +13,7 @@ use Hatice\makeupshop\Product;
 
 $allProducts = Product::getAll();
 
-var_dump($allProducts);
+//var_dump($allProducts);
 
 if(!empty($_POST)){
     try {
