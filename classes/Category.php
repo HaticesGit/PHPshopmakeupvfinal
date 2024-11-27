@@ -49,8 +49,8 @@ class Category {
     public function addCategory($type) {
         try {
             $pdo = new \PDO('mysql:host=localhost;dbname=makeupshop', 'root', 'root');
-            $statement = $pdo->prepare('INSERT INTO categories (type) VALUES (:type)');
-            $statement->bindParam(':type', $type);
+            $statement = $pdo->prepare('INSERT INTO category (type) VALUES (:type)');
+            $statement->bindValue(":type", $this->type);
             $statement->execute();
         } catch (\PDOException $e) {
             echo 'Connection failed: ' . $e->getMessage();

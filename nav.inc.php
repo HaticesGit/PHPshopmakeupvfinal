@@ -10,6 +10,7 @@
     <a href=""><img src="" alt=""></a> <!--cart-->
     <a href="">Account</a>
     <a href="addProduct.php">Add product</a>
+    <a href="addCategory.php">Add Category</a>
     <a href="logout.php">Log Out</a>
 
     

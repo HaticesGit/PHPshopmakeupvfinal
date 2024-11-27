@@ -207,4 +207,16 @@ class Product{
             echo 'Connection failed: ' . $e->getMessage();
         }
     }
+
+    public static function getProductsByCategory($category_id) {
+        try {
+            $pdo = new \PDO('mysql:host=localhost;dbname=makeupshop', 'root', 'root');
+            $statement = $pdo->prepare('SELECT * FROM products WHERE category_id = :category_id');
+            $statement->bindParam(':category_id', $category_id);
+            $statement->execute();
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
+            echo 'Connection failed: ' . $e->getMessage();
+        }
+    }
 }
