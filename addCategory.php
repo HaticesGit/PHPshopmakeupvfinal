@@ -1,21 +1,23 @@
 <?php
 namespace Hatice\makeupshop;
+require_once(__DIR__.'\bootstrap.php');
+include_once(__DIR__.'\classes\Category.php');
+use Hatice\makeupshop\Db;
 use Hatice\makeupshop\Category;
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $type = $_POST['type'];
 
     $category = new Category();
-    $category->addCategory($type);
+    $category->setType($type);
 
+    $result = $category->addCategory($type);
     echo "Category added successfully!";
 }
-?>
-
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html>
 <head>
     <title>Add Category</title>
