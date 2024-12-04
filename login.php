@@ -28,6 +28,7 @@
 			session_start();
 			$_SESSION["loggedin"] = true;
 			$_SESSION["email"]=$email;
+			$_SESSION['user'] = $user;
 			header('Location: index.php');
 		}
 		else{

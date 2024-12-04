@@ -1,14 +1,18 @@
 <?php 
 namespace Hatice\makeupshop;
+use Hatice\makeupshop\interfaces\iUser;
 include_once("Db.php");
-   
+
+include_once(__DIR__ . '/interfaces/iUser.php');
+if (!interface_exists('Hatice\makeupshop\Interfaces\iUser')) {
+    echo "Interface iUser not found!";
+}
 
 
 /*$user = new User();
 //...
 $user->save();
 if(User::canLogin($email, $password))*/
-
 abstract class User implements Interfaces\iUser{
     protected $firstname; //als r staat var staat er eignelijk public 4 principes abstactie, encapsulation, overerving en polymorfism (test vraag)
     protected $lastname;
@@ -17,6 +21,7 @@ abstract class User implements Interfaces\iUser{
     protected $password;
     protected $birthdate;
 
+    
     /**
      * Get the value of firstname
      */ 
@@ -141,6 +146,31 @@ abstract class User implements Interfaces\iUser{
         return $statement->fetchAll(PDO::FETCH_ASSOC);
 
     }*/
-
-    
+    public function changePassword($oldPassword, $newPassword) {
+        try {
+            $pdo = new \PDO('mysql:host=localhost;dbname=makeupshop', 'root', 'root');
+            
+            // Fetch the current password hash from the database using email
+            $statement = $pdo->prepare('SELECT password FROM users WHERE email = :email');
+            $statement->bindValue(':email', $this->email);
+            $statement->execute();
+            $result = $statement->fetch(\PDO::FETCH_ASSOC);
+            
+            if ($result && password_verify($oldPassword, $result['password'])) {
+                // Old password is correct, update to new password
+                $newPasswordHash = password_hash($newPassword, PASSWORD_DEFAULT);
+                $updateStatement = $pdo->prepare('UPDATE users SET password = :password WHERE email = :email');
+                $updateStatement->bindValue(':password', $newPasswordHash);
+                $updateStatement->bindValue(':email', $this->email);
+                $updateStatement->execute();
+                return true;
+            } else {
+                // Old password is incorrect
+                return false;
+            }
+        } catch (\PDOException $e) {
+            echo 'Connection failed: ' . $e->getMessage();
+            return false;
+        }
+    }
   }
