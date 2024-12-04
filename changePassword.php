@@ -1,40 +1,20 @@
 <?php
 include_once(__DIR__ . '/bootstrap.php');
 include_once(__DIR__ . '/classes/User.php');
+use Hatice\makeupshop\User;
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-var_dump($_SESSION);
 
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header('Location: login.php');
-    exit;
-}
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $currentPassword = $_POST['currentPassword'];
-    $newPassword = $_POST['newPassword'];
-    $confirmPassword = $_POST['confirmPassword'];
-
-    if ($newPassword !== $confirmPassword) {
-        $error = "New passwords do not match.";
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $newPassword = $_POST["newPassword"];
+    $confirmPassword = $_POST["confirmPassword"];
+    
+    if ($newPassword === $confirmPassword) {
+        $email = $_SESSION["email"];
+        User::changePassword($email, $newPassword);
+        echo "Password successfully updated!";
     } else {
-        $conn = new PDO('mysql:dbname=makeupshop;host=localhost', "root", "root");
-        $statement = $conn->prepare('SELECT * FROM users WHERE email = :email');
-        $statement->bindValue(':email', $_SESSION['email']);
-        $statement->execute();
-        $user = $statement->fetch(PDO::FETCH_ASSOC);
-
-        if ($user && password_verify($currentPassword, $user['password'])) {
-            $newPasswordHash = password_hash($newPassword, PASSWORD_DEFAULT);
-            $updateStatement = $conn->prepare('UPDATE users SET password = :password WHERE email = :email');
-            $updateStatement->bindValue(':password', $newPasswordHash);
-            $updateStatement->bindValue(':email', $_SESSION['email']);
-            $updateStatement->execute();
-
-            $success = "Password successfully changed.";
-        } else {
-            $error = "Current password is incorrect.";
-        }
+        echo "Password needs to be the same.";
     }
 }
 ?>
