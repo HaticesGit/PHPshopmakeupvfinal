@@ -36,7 +36,6 @@ error_reporting(E_ALL);
 			$_SESSION["loggedin"] = true;
 			$_SESSION["email"] = $email;
 			$_SESSION['user'] = $user;
-			$_SESSION["admin"] = $user['admin'];
 			header('Location: index.php');
 		} else {
 			$error = true;

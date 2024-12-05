@@ -1,5 +1,7 @@
 <?php
-require_once(__DIR__.'/bootstrap.php');
+namespace Hatice\makeupshop;
+require_once(__DIR__.'\bootstrap.php');
+include_once(__DIR__.'\classes\User.php');
 //var_dump(file_exists(__DIR__ . "/classes/Product.php")); // Should output: bool(true)
 //var_dump(class_exists("Hatice\\makeupshop\\Product"));
 
@@ -10,6 +12,18 @@ require_once(__DIR__.'/bootstrap.php');
 
 use Hatice\makeupshop\Db;
 use Hatice\makeupshop\Product;
+$email = $_SESSION['email'];
+$isAdmin = User::adminCheck($email);
+
+if (!$isAdmin['admin']) {
+    header('Location: index.php');
+    exit;
+}
+
+// if (!isset($_SESSION['admin']) || $_SESSION['admin'] != 1) {
+//     header('Location: index.php');
+//     exit;
+// }
 
 $allProducts = Product::getAll();
 
