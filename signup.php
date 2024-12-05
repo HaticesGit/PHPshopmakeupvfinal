@@ -1,19 +1,32 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+include_once(__DIR__ . "/classes/User.php");
+use Hatice\makeupshop\User;
+
     if(!empty($_POST)){
         $email = $_POST["email"];
         $password = $_POST["password"];
 
+        $user = User::canLogin($email, $password);
+        if ($user) {
+            $error = "This email is already in use. Please choose another one.";
+        } 
+        
+        else {
         $options = [
             'cost' => 12,
         ];
         $hash = password_hash($password, PASSWORD_DEFAULT, $options);
-        echo $hash;
     
-        $conn = new PDO('mysql:dbname=makeupshop;host=localhost', "root", "root");
-        $statement = $conn->prepare('INSERT INTO users (email, password) VALUES (:email, :password)');
-        $statement->bindValue(':email', $email); //veilig tegen sql ijectie
-        $statement->bindValue(':password', $hash);
-        $statement->execute();
+        $newUser = new User();
+        $newUser->setEmail($email);
+        $newUser->setPassword($hash);
+        $newUser->save();
+
+        header('Location: index.php');
+        }
     }
 
 ?><!DOCTYPE html>
@@ -33,7 +46,7 @@
         <?php if(isset($error)): ?>
         <div class="formError">
             <p>
-                Sorry, we can't log you in with that email address and password. Can you try again?
+                <?php echo $error; ?>
             </p>
         </div>
         <?php endif; ?>

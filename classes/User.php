@@ -13,7 +13,7 @@ if (!interface_exists('Hatice\makeupshop\Interfaces\iUser')) {
 //...
 $user->save();
 if(User::canLogin($email, $password))*/
-abstract class User implements Interfaces\iUser{
+ class User {
     protected $firstname; //als r staat var staat er eignelijk public 4 principes abstactie, encapsulation, overerving en polymorfism (test vraag)
     protected $lastname;
 
@@ -130,12 +130,12 @@ abstract class User implements Interfaces\iUser{
 
         return $this;
     }
-    /*public function save(){
+    public function save(){
         $conn = Db::getConnection();
-        $conn = new PDO('mysql:dbname=makeupshop;host=localhost', "root", "root");
-        $statement = $conn->prepare('INSERT INTO users (firstname, lastname) VALUES (:firstname , :lastname)');
-        $statement->bindValue("firstname", $this->firstname);
-        $statement->bindValue("lastname", $this->lastname);
+        // $conn = new PDO('mysql:dbname=makeupshop;host=localhost', "root", "root");
+        $statement = $conn->prepare('INSERT INTO users (email, password) VALUES (:email , :password)');
+        $statement->bindValue("email", $this->email);
+        $statement->bindValue("password", $this->password);
         $statement->execute();
     }
 
@@ -145,7 +145,24 @@ abstract class User implements Interfaces\iUser{
         $statement = $conn->query('SELECT * FROM users');
         return $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    }*/
+    }
+
+    public static function canLogin($email, $password) {
+        $conn = Db::getConnection();
+        $statement = $conn->prepare('SELECT * FROM users WHERE email = :email');
+        $statement->bindValue(':email', $email);
+        $statement->execute();
+        $user = $statement->fetch(\PDO::FETCH_ASSOC);
+        if ($user) {
+            $hash = $user['password'];
+            if (password_verify($password, $hash)) {
+                return $user;
+            }
+        }
+        return false;
+    }
+
+
     public static function changePassword($email, $password) {
         $conn = Db::getConnection();
         $query = $conn->prepare("UPDATE users SET password = :password WHERE email = :email");

@@ -1,38 +1,44 @@
 <?php
-	function canLogIn($p_email, $p_password){ //p voor parameter, kan eender wat noemn
-		$conn = new PDO('mysql:dbname=makeupshop;host=localhost', "root", "root");
-		$statement = $conn->prepare('SELECT * FROM users WHERE email = :email'); //?
-		$statement->bindValue(':email', $p_email); // bindvalue?
-		$statement->execute();
-		$user = $statement->fetch(PDO::FETCH_ASSOC); //?
-		if($user){
-			$hash = $user['password'];
-			if(password_verify($p_password, $hash)){
-				return true;
-			}
-			else{
-				return false;
-			}
-		}
-		else{
-			//not found
-			return false;
-		}
-	}
-	
-	if(!empty($_POST)){
-		$email = $_POST["email"]; //in form 
+	// function canLogIn($p_email, $p_password){ //p voor parameter, kan eender wat noemn
+	// 	$conn = new PDO('mysql:dbname=makeupshop;host=localhost', "root", "root");
+	// 	$statement = $conn->prepare('SELECT * FROM users WHERE email = :email'); //?
+	// 	$statement->bindValue(':email', $p_email); // bindvalue?
+	// 	$statement->execute();
+	// 	$user = $statement->fetch(PDO::FETCH_ASSOC); //?
+	// 	if($user){
+	// 		$hash = $user['password'];
+	// 		if(password_verify($p_password, $hash)){
+	// 			return true;
+	// 		}
+	// 		else{
+	// 			return false;
+	// 		}
+	// 	}
+	// 	else{
+	// 		//not found
+	// 		return false;
+	// 	}
+	// }
+
+
+	ini_set('display_errors', 1);
+error_reporting(E_ALL);
+	include_once('classes/User.php');
+	use Hatice\makeupshop\User;
+
+	if (!empty($_POST)) {
+		$email = $_POST["email"];
 		$password = $_POST["password"];
 
-		if(canLogIn($email, $password)){
+		$user = User::canLogin($email, $password);
+		if ($user) {
 			session_start();
 			$_SESSION["loggedin"] = true;
-			$_SESSION["email"]=$email;
+			$_SESSION["email"] = $email;
 			$_SESSION['user'] = $user;
+			$_SESSION["admin"] = $user['admin'];
 			header('Location: index.php');
-		}
-		else{
-			//niet ok
+		} else {
 			$error = true;
 		}
 	}
