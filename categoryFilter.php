@@ -20,15 +20,19 @@ if($category){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title> Our products </title>
 </head>
 <body>
     <?php include_once("nav.inc.php"); ?>
     <?php foreach ($product as $p): ?>
     <li>
-        <h2><?php echo ($p['title']); ?></h2>
-        <p><?php echo ($p['img']); ?></p>
-        <p>Price: <?php echo ($p['price']); ?></p>
+        <a href="productPage.php?id=<?php echo $p['id']; ?>">
+            <div class="product">
+                <h2><?php echo ($p['title']); ?></h2>
+                <p><?php echo ($p['img']); ?></p>
+                <p>Price: <?php echo ($p['price']); ?></p>
+            </div>
+        </a>
     <?php endforeach; ?>
 </body>
 </html>
