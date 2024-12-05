@@ -23,6 +23,7 @@ if($category){
     <title>Document</title>
 </head>
 <body>
+    <?php include_once("nav.inc.php"); ?>
     <?php foreach ($product as $p): ?>
     <li>
         <h2><?php echo ($p['title']); ?></h2>

@@ -1,6 +1,6 @@
 <nav>
     <a href=""><Img></Img></a>
-    <a href="">Home</a>
+    <a href="index.php">Home</a>
     <a href="">Products</a>
     
     
