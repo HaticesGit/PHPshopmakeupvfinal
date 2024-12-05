@@ -7,7 +7,6 @@ use Hatice\makeupshop\User;
 
 $email = $_SESSION['email'];
 $isAdmin = User::adminCheck($email);
-?>
 ?><nav>
     <a href=""><Img></Img></a>
     <a href="index.php">Home</a>
