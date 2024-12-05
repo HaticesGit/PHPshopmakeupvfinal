@@ -29,6 +29,13 @@ $newProducts = $product->getNewProducts();
 </head>
 <body>
     <?php include_once("nav.inc.php"); ?>
+    <div class="filter">
+        <a href="categoryFilter.php?category=1">Blush</a>
+        <a href="categoryFilter.php?category=2">Lipgloss</a>
+        <a href="categoryFilter.php?category=4">Eyeshadow</a>
+        <a href="categoryFilter.php?category=3">Mascara</a>
+    </div>
+
     <article class="display">
         <div class="newsfeed">
             <h3>New!</h3>
