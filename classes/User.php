@@ -193,4 +193,11 @@ if(User::canLogin($email, $password))*/
         $query->bindValue(":variation", $variation);
         $query->execute();
     }
+
+    public static function deleteProduct($id) {
+        $conn = Db::getConnection();
+        $query = $conn->prepare("DELETE FROM products WHERE id = :id");
+        $query->bindValue(":id", $id);
+        $query->execute();
+    }
   }

@@ -83,7 +83,8 @@ if(!empty($_POST)){
             <input type="text" name="stock" id="stock" value="<?php echo $product['stock']; ?>">
             <label for="variation">Variation</label>
             <input type="text" name="variation" id="variation" value="<?php echo $product['variation']; ?>">
-            <input type="submit" value="Edit Product">
+            <input type="submit" name="aciton" value="Edit Product">
+            <a href="deleteProduct.php?id=<?php echo $product['id']; ?>">Delete</a>
         </form>
     </div>
     <?php endif; ?>
