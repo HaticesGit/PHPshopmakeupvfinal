@@ -7,6 +7,7 @@ include_once(__DIR__ . "/classes/Product.php");
 include_once(__DIR__ . "/classes/User.php");
 use Hatice\makeupshop\User;
 use Hatice\makeupshop\Db;
+use Hatice\makeupshop\Product;
 
 $email = $_SESSION['email'];
 $isAdmin = User::adminCheck($email);
@@ -31,7 +32,7 @@ else {
     exit;
 }
 
-if(!empty($_POST)){
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['aciton'])){
     $id = $_POST['id'];
     $title = $_POST['title'];
     $price = $_POST['price'];
@@ -45,6 +46,18 @@ if(!empty($_POST)){
     header("Location: index.php");
     exit;
 }   
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addToCart'])) {
+    $productId = $_GET['id'];
+    $userId = User::getByEmail($_SESSION["email"])['id'];
+
+    try {
+        Product::addToCart($userId, $productId);
+        echo "Product added to cart successfully!";
+    } catch (Exception $e) {
+        echo "Error adding product to cart: " . $e->getMessage();
+    }
+}
 
 
 ?><!DOCTYPE html>
@@ -64,6 +77,9 @@ if(!empty($_POST)){
         <p><?php echo ($product['descr']); ?></p>
         <p>Stock: <?php echo ($product['stock']); ?></p>
         <p>Variation: <?php echo ($product['variation']); ?></p>
+        <form action="" method="POST">
+            <input type="submit" name="addToCart" value="Add to cart">
+        </form>
     </div>
 
     <?php if ($isAdmin['admin']): ?>

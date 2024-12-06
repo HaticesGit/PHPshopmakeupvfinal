@@ -235,4 +235,38 @@ class Product{
         $query->execute();
         return $query->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public static function addToCart($userId, $productId) {
+        $conn = Db::getConnection();
+    
+        // Step 1: Check if there's an existing cart (status = 0)
+        $query = $conn->prepare("SELECT id FROM orders WHERE user_id = :user_id AND status = 0");
+        $query->bindValue(":user_id", $userId);
+        $query->execute();
+        $cart = $query->fetch(\PDO::FETCH_ASSOC);
+    
+        if (empty($cart)) {
+            $query = $conn->prepare("INSERT INTO orders (user_id, moment, address, status) VALUES (:user, NOW(), 'TBD', '0')");
+            $query->bindValue(":user", $userId);
+            $query->execute();
+        } 
+    
+        // Step 3: Add the product to the `orders_products` table
+        $query = $conn->prepare("INSERT INTO orders_products (orders_id, products_id) VALUES ((SELECT ID FROM orders WHERE user_id = :user AND status = 0 LIMIT 1), :products_id)");
+        $query->bindValue(":user", $userId);
+        $query->bindValue(":products_id", $productId);
+        $query->execute();
+    
+        // Step 4: Get the product price and update the cart's total price
+        $query = $conn->prepare("SELECT price FROM products WHERE id = :product_id");
+        $query->bindValue(":product_id", $productId);
+        $query->execute();
+        $product = $query->fetch(\PDO::FETCH_ASSOC);
+
+        $query = $conn->prepare("UPDATE orders SET fullPrice = fullPrice + :price WHERE user_id = :user_id AND status = 0");
+        $query->bindValue(":price", $product['price']);
+        $query->bindValue(":user_id", $userId);
+        $query->execute();
+    }
+    
 }

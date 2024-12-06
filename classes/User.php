@@ -200,4 +200,12 @@ if(User::canLogin($email, $password))*/
         $query->bindValue(":id", $id);
         $query->execute();
     }
+
+    public static function getByEmail($email) {
+        $conn = Db::getConnection();
+        $query = $conn->prepare("SELECT * FROM users WHERE email = :email");
+        $query->bindValue(":email", $email);
+        $query->execute();
+        return $query->fetch(\PDO::FETCH_ASSOC);
+    }
   }
