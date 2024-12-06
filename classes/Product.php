@@ -227,4 +227,12 @@ class Product{
         $statement->execute();
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public static function search($search) {
+        $conn = Db::getConnection();
+        $query = $conn->prepare("SELECT * FROM products WHERE title LIKE :search OR descr LIKE :search");
+        $query->bindValue(":search", "%$search%");
+        $query->execute();
+        return $query->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }
