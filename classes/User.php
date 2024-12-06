@@ -181,4 +181,16 @@ if(User::canLogin($email, $password))*/
         $result = $statement->fetch(\PDO::FETCH_ASSOC);
         return $result;
     }
+    public static function editProduct( $id, $title, $price, $img, $descr, $stock, $variation) {
+        $conn = Db::getConnection();
+        $query = $conn->prepare("UPDATE products SET title = :title, price = :price, img = :img, descr = :descr, stock = :stock, variation = :variation WHERE id = :id");
+        $query->bindValue(":id", $id);
+        $query->bindValue(":title", $title);
+        $query->bindValue(":price", $price);
+        $query->bindValue(":img", $img);
+        $query->bindValue(":descr", $descr);
+        $query->bindValue(":stock", $stock);
+        $query->bindValue(":variation", $variation);
+        $query->execute();
+    }
   }
