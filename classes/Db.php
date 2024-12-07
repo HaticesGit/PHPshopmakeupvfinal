@@ -27,7 +27,7 @@
 
         public static function getConnection(){
             if (self::$conn === null) {
-                $options[PDO::MYSQL_ATTR_SSL_CA] = self::SETTINGS['ssl_ca'];
+                $options[\PDO::MYSQL_ATTR_SSL_CA] = self::SETTINGS['ssl_ca'];
                 self::$conn = new PDO("mysql:host=".self::SETTINGS["host"].";dbname=".self::SETTINGS["db"]."",self::SETTINGS["user"],self::SETTINGS["password"], $options);
                 //[PDO::MYSQL_ATTR_SSL_CA => __DIR__."/CA.pem"]
                 return self::$conn;
