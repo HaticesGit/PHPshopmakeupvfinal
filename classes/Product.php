@@ -280,5 +280,45 @@ class Product{
     
         return ['items' => $cartItems, 'totalPrice' => $totalPrice];
     }
+
+    public static function order($userId, $address) {
+        $conn = Db::getConnection();
+    
+        // Step 1: Fetch the active cart (status = 0)
+        $query = $conn->prepare("SELECT id, fullPrice FROM orders WHERE user_id = :user_id AND status = 0");
+        $query->bindValue(":user_id", $userId);
+        $query->execute();
+        $cart = $query->fetch(\PDO::FETCH_ASSOC);
+    
+        if (empty($cart)) {
+            // No active cart to finalize
+            throw new \Exception("No active cart found");
+        }
+    
+        // Step 2: Fetch the user's current wallet balance (units)
+        $query = $conn->prepare("SELECT units FROM users WHERE id = :user_id");
+        $query->bindValue(":user_id", $userId);
+        $query->execute();
+        $user = $query->fetch(\PDO::FETCH_ASSOC);
+    
+        if (empty($user) || $user['units'] < $cart['fullPrice']) {
+            // Not enough units in the wallet
+            throw new \Exception("Insufficient funds in the wallet to complete this order.");
+        }
+    
+        // Step 3: Deduct the total price from the user's wallet
+        $query = $conn->prepare("UPDATE users SET units = units - :amount WHERE id = :user_id");
+        $query->bindValue(":amount", $cart['fullPrice']);
+        $query->bindValue(":user_id", $userId);
+        $query->execute();
+    
+        // Step 4: Update the order with the address and set the status to 1 (completed)
+        $query = $conn->prepare("UPDATE orders SET address = :address, status = 1, moment = NOW() WHERE id = :cart_id");
+        $query->bindValue(":address", $address);
+        $query->bindValue(":cart_id", $cart['id']);
+        $query->execute();
+    
+        return "Order has been placed successfully.";
+    }
     
 }

@@ -7,6 +7,7 @@ include_once(__DIR__ . "/classes/Product.php");
 use Hatice\makeupshop\User;
 use Hatice\makeupshop\Product;
 
+
 $userId = User::getByEmail($_SESSION["email"])['id'];
 
 try {
@@ -17,6 +18,21 @@ try {
     echo "Error fetching cart: " . $e->getMessage();
     exit;
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order'])) {
+    $address = trim($_POST['address']);
+
+    if (empty($address)) {
+        $error = "Please provide a valid address.";
+    } else {
+        try {
+            Product::order($userId, $address);
+            header("Location: cart.php");
+        } catch (Exception $e) {
+            $error = "Error placing the order: " . $e->getMessage();
+        }
+    }
+}
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,6 +42,11 @@ try {
 </head>
 <body>
 <h1>Your Cart</h1>
+
+    <?php if (!empty($error)): ?>
+        <p><?php echo ($error); ?></p>
+    <?php endif; ?>
+
     <?php if (empty($cartItems)): ?>
         <p>Your cart is empty.</p>
     <?php else: ?>
@@ -39,5 +60,10 @@ try {
         </ul>
         <p><strong>Total Price:</strong> $<?php echo ($totalPrice); ?></p>
     <?php endif; ?>
+
+    <form action="cart.php" method="post" class="form">
+        <input type="text" name="address" placeholder="Your address">
+        <input type="submit" name="order" value="Order">
+    </form>
 </body>
 </html>
