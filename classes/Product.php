@@ -281,6 +281,18 @@ class Product{
         return ['items' => $cartItems, 'totalPrice' => $totalPrice];
     }
 
+    public static function viewOrder($userId) {
+        $conn = Db::getConnection();
+        $query = $conn->prepare("SELECT products.id, products.title, products.price, orders.fullPrice FROM products JOIN orders_products ON products.id = orders_products.products_id JOIN orders ON orders_products.orders_id = orders.id WHERE orders.user_id = :user_id AND orders.status = 1");
+        $query->bindValue(":user_id", $userId);
+        $query->execute();
+        $cartItems = $query->fetchAll(\PDO::FETCH_ASSOC);
+    
+        $totalPrice = !empty($cartItems) ? $cartItems[0]['fullPrice'] : 0;
+    
+        return ['items' => $cartItems, 'totalPrice' => $totalPrice];
+    }
+
     public static function order($userId, $address) {
         $conn = Db::getConnection();
     

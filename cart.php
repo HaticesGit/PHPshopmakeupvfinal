@@ -41,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order'])) {
     <title>Cart</title>
 </head>
 <body>
+    <?php include_once("nav.inc.php"); ?>
 <h1>Your Cart</h1>
 
     <?php if (!empty($error)): ?>
@@ -65,5 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order'])) {
         <input type="text" name="address" placeholder="Your address">
         <input type="submit" name="order" value="Order">
     </form>
+    <a href="orders.php">View orders</a>
 </body>
 </html>
