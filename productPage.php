@@ -5,6 +5,8 @@ include_once(__DIR__ . "/bootstrap.php");
 include_once(__DIR__ . "/classes/Db.php");
 include_once(__DIR__ . "/classes/Product.php");
 include_once(__DIR__ . "/classes/User.php");
+include_once(__DIR__ . "/classes/Review.php");
+use Hatice\makeupshop\Review;
 use Hatice\makeupshop\User;
 use Hatice\makeupshop\Db;
 use Hatice\makeupshop\Product;
@@ -13,6 +15,8 @@ $email = $_SESSION['email'];
 $isAdmin = User::adminCheck($email);
 
 $product_id = isset($_GET['id']) ? $_GET['id'] : null;
+$allReviews = Review::getAll($product_id);
+var_dump($allReviews);
 
 if($product_id){
     try {
@@ -82,6 +86,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addToCart'])) {
         </form>
     </div>
 
+    <div class="reviews">
+        <h2>Here are some reviews</h2>
+            <input type="text" name="reviews" id="reviewText" placeholder="Leave a review!">
+            <!-- <input type="submit" name="submit" value="Submit"> -->
+            <a href="#" class="btn" id="btnAddReview" data-productid="<?php echo $product['id']; ?>">Add review</a>
+        <ul class="reviewLI">
+            <?php foreach ($allReviews as $review): ?>
+                <li><?php echo $review['text']; ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+
     <?php if ($isAdmin['admin']): ?>
     <div class="editProductForm formField">
         <h2>Edit Product</h2>
@@ -104,5 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addToCart'])) {
         </form>
     </div>
     <?php endif; ?>
+
+    <script src="app.js" ></script>
 </body>
 </html>
