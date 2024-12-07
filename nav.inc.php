@@ -8,6 +8,7 @@ use Hatice\makeupshop\User;
 
 $email = $_SESSION['email'];
 $isAdmin = User::adminCheck($email);
+$userMoney = User::viewMoney($email);
 
 // if(!empty ($_GET['search'])){
 //     $search = $_GET['search'];
@@ -30,6 +31,7 @@ $isAdmin = User::adminCheck($email);
 
     <a href=""><img src="" alt=""></a> <!--heart-->
     <a href="cart.php"><img src="" alt="">Cart</a> <!--cart-->
+    <p>Wallet: <?php echo htmlspecialchars($userMoney['units'] ?? '0'); ?></p>
     <a href="">Account</a>
 
     <?php if ($isAdmin['admin']): ?>

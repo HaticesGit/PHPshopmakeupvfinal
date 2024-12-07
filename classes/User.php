@@ -208,4 +208,12 @@ if(User::canLogin($email, $password))*/
         $query->execute();
         return $query->fetch(\PDO::FETCH_ASSOC);
     }
+
+    public static function viewMoney($email) {
+        $conn = Db::getConnection();
+        $query = $conn->prepare("SELECT units FROM users WHERE email = :email");
+        $query->bindValue(":email", $email);
+        $query->execute();
+        return $query->fetch(\PDO::FETCH_ASSOC);
+    }
   }
