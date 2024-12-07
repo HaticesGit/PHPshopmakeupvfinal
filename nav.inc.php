@@ -29,7 +29,7 @@ $isAdmin = User::adminCheck($email);
 
 
     <a href=""><img src="" alt=""></a> <!--heart-->
-    <a href=""><img src="" alt="">Cart</a> <!--cart-->
+    <a href="cart.php"><img src="" alt="">Cart</a> <!--cart-->
     <a href="">Account</a>
 
     <?php if ($isAdmin['admin']): ?>
