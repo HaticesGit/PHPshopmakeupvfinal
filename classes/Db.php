@@ -19,19 +19,30 @@
         const SETTINGS = [
             "user" => "root", 
             "password" => "tOJmgRJtOljxohfnPqxNHWEjOUxvArYw", 
-            "host" => "mysql.railway.internal", 
+            "host" => "junction.proxy.rlwy.net:31590/railway", 
             "db" => "railway",
             "ssl_ca" => __DIR__ . "/CA.pem"
         ];
 
 
         public static function getConnection(){
-            if (self::$conn === null) {
-                $options[\PDO::MYSQL_ATTR_SSL_CA] = self::SETTINGS['ssl_ca'];
-                self::$conn = new \PDO("mysql:host=".self::SETTINGS["host"].";dbname=".self::SETTINGS["db"]."",self::SETTINGS["user"],self::SETTINGS["password"], $options);
-                //[PDO::MYSQL_ATTR_SSL_CA => __DIR__."/CA.pem"]
-                return self::$conn;
+        if (self::$conn === null) {
+            $options = [
+                \PDO::MYSQL_ATTR_SSL_CA => self::SETTINGS['ssl_ca'],
+                \PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false // For testing purposes only
+            ];
+            try {
+                self::$conn = new \PDO(
+                    "mysql:host=".self::SETTINGS["host"].";dbname=".self::SETTINGS["db"],
+                    self::SETTINGS["user"],
+                    self::SETTINGS["password"],
+                    $options
+                );
+            } catch (\PDOException $e) {
+                // Handle the exception (e.g., log the error, rethrow, etc.)
+                throw new \Exception("Database connection error: " . $e->getMessage());
             }
-            else {return self::$conn;}
         }
+        return self::$conn;
+    }
     }
