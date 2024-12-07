@@ -91,4 +91,13 @@ use Hatice\makeupshop\Db;
             return $statement->fetchAll(\PDO::FETCH_ASSOC);
         }
 
+        public static function hasOrderedProduct($user_id, $product_id) {
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT COUNT(*) FROM orders JOIN orders_products ON orders.id = orders_products.orders_id WHERE orders.user_id = :user_id AND orders_products.products_id = :product_id");
+            $statement->bindValue(":user_id", $user_id);
+            $statement->bindValue(":product_id", $product_id);
+            $statement->execute();
+            return $statement->fetchColumn() > 0;
+        }
+
     }

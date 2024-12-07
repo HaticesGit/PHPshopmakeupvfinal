@@ -11,12 +11,14 @@ use Hatice\makeupshop\User;
 use Hatice\makeupshop\Db;
 use Hatice\makeupshop\Product;
 
+$userId = User::getByEmail($_SESSION["email"])['id'];
 $email = $_SESSION['email'];
 $isAdmin = User::adminCheck($email);
-
 $product_id = isset($_GET['id']) ? $_GET['id'] : null;
 $allReviews = Review::getAll($product_id);
 var_dump($allReviews);
+
+$canReview = Review::hasOrderedProduct($userId, $product_id);
 
 if($product_id){
     try {
@@ -53,7 +55,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['aciton'])){
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addToCart'])) {
     $productId = $_GET['id'];
-    $userId = User::getByEmail($_SESSION["email"])['id'];
+    // $userId = User::getByEmail($_SESSION["email"])['id'];
 
     try {
         Product::addToCart($userId, $productId);
@@ -87,15 +89,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addToCart'])) {
     </div>
 
     <div class="reviews">
-        <h2>Here are some reviews</h2>
-            <input type="text" name="reviews" id="reviewText" placeholder="Leave a review!">
-            <!-- <input type="submit" name="submit" value="Submit"> -->
-            <a href="#" class="btn" id="btnAddReview" data-productid="<?php echo $product['id']; ?>">Add review</a>
-        <ul class="reviewLI">
-            <?php foreach ($allReviews as $review): ?>
-                <li><?php echo $review['text']; ?></li>
-            <?php endforeach; ?>
-        </ul>
+    <h2>Here are some reviews</h2>
+    <?php if ($canReview): ?>
+        <input type="text" name="reviews" id="reviewText" placeholder="Leave a review!">
+        <a href="#" class="btn" id="btnAddReview" data-productid="<?php echo $product['id']; ?>">Add review</a>
+    <?php else: ?>
+        <p>You need to purchase this product to leave a review.</p>
+    <?php endif; ?>
+    <ul class="reviewLI">
+        <?php foreach ($allReviews as $review): ?>
+            <li><?php echo htmlspecialchars($review['text']); ?></li>
+        <?php endforeach; ?>
+    </ul>
     </div>
 
     <?php if ($isAdmin['admin']): ?>
