@@ -23,8 +23,8 @@
 	use Hatice\makeupshop\User;
 
 	if (!empty($_POST)) {
-		$email = $_POST["email"];
-		$password = $_POST["password"];
+		$email = htmlspecialchars($_POST["email"], ENT_QUOTES, 'UTF-8');
+    	$password = htmlspecialchars($_POST["password"], ENT_QUOTES, 'UTF-8');
 
 		$user = User::canLogin($email, $password);
 		if ($user) {

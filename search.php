@@ -33,9 +33,9 @@ if($search){
                 <li>
                     <a href="productPage.php?id=<?php echo $product['id']; ?>">
                     <div class="product">
-                        <h2><?php echo ($product['title']); ?></h2>
-                        <img src="<?php echo ($product['img']); ?>" alt="">
-                        <p>Price: <?php echo ($product['price']); ?></p>
+                        <h2><?php echo htmlspecialchars($product['title'], ENT_QUOTES, 'UTF-8'); ?></h2>
+                        <img src="<?php echo htmlspecialchars($product['img'], ENT_QUOTES, 'UTF-8'); ?>" alt="">
+                        <p>Price: <?php echo htmlspecialchars($product['price'], ENT_QUOTES, 'UTF-8'); ?></p>
                     </div>
             </a>
             </li>

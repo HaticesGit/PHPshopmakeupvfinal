@@ -12,7 +12,7 @@ use Hatice\makeupshop\Product;
 $userId = User::getByEmail($_SESSION["email"])['id'];
 $email = $_SESSION['email'];
 $isAdmin = User::adminCheck($email);
-$product_id = isset($_GET['id']) ? $_GET['id'] : null;
+$product_id = isset($_GET['id']) ? htmlspecialchars($_GET['id'], ENT_QUOTES, 'UTF-8') : null;
 $allReviews = Review::getAll($product_id);
 
 $canReview = Review::hasOrderedProduct($userId, $product_id);
@@ -26,7 +26,7 @@ if($product_id){
         $product = $statement->fetch(\PDO::FETCH_ASSOC);
     }
     catch (Exception $e) {
-        die("Error fetching product: " . $e->getMessage());
+        die("Error fetching product: " . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8'));
     }
     
 }
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addToCart'])) {
         Product::addToCart($userId, $productId);
         echo "Product added to cart successfully!";
     } catch (Exception $e) {
-        echo "Error adding product to cart: " . $e->getMessage();
+        echo "Error adding product to cart: " . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8');
     }
 }
 
@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addToCart'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo ($product['title'] ?? "Product Page"); ?></title>
+    <title><?php echo htmlspecialchars($product['title'], ENT_QUOTES, 'UTF-8'); ?></title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/makeupshop.css">
 </head>
@@ -76,12 +76,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addToCart'])) {
     <?php include_once("nav.inc.php"); ?>
 
     <div class="product">
-        <h2><?php echo ($product['title']); ?></h2>
-        <img src="<?php echo ($product['img']); ?>" alt="">
-        <p>Price: <?php echo ($product['price']); ?></p>
-        <p><?php echo ($product['descr']); ?></p>
-        <p>Stock: <?php echo ($product['stock']); ?></p>
-        <p>Variation: <?php echo ($product['variation']); ?></p>
+        <h2><?php echo htmlspecialchars($product['title'], ENT_QUOTES, 'UTF-8'); ?></h2>
+        <img src=" <?php echo htmlspecialchars($product['img'], ENT_QUOTES, 'UTF-8'); ?>" alt="">
+        <p>Price:  <?php echo htmlspecialchars($product['price'], ENT_QUOTES, 'UTF-8'); ?></p>
+        <p><?php echo htmlspecialchars($product['descr'], ENT_QUOTES, 'UTF-8'); ?></p>
+        <p>Stock:  <?php echo htmlspecialchars($product['stock'], ENT_QUOTES, 'UTF-8'); ?></p>
+        <p>Variation:  <?php echo htmlspecialchars($product['variation'], ENT_QUOTES, 'UTF-8'); ?></p>
         <form action="" method="POST">
             <input type="submit" name="addToCart" value="Add to cart">
         </form>
@@ -106,21 +106,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addToCart'])) {
     <div class="editProductForm formField">
         <h2>Edit Product</h2>
         <form action="" method="post">
-            <input type="hidden" name="id" value="<?php echo $product['id']; ?>">
+            <input type="hidden" name="id" value="<?php echo htmlspecialchars($product['id'], ENT_QUOTES, 'UTF-8'); ?>">
             <label for="title">Title</label>
-            <input type="text" name="title" id="title" value="<?php echo $product['title']; ?>">
+            <input type="text" name="title" id="title" value="<?php echo htmlspecialchars($product['title'], ENT_QUOTES, 'UTF-8'); ?>">
             <label for="price">Price</label>
-            <input type="text" name="price" id="price" value="<?php echo $product['price']; ?>">
+            <input type="text" name="price" id="price" value="<?php echo htmlspecialchars($product['price'], ENT_QUOTES, 'UTF-8'); ?>">
             <label for="img">Image</label>
-            <input type="text" name="img" id="img" value="<?php echo $product['img']; ?>">
+            <input type="text" name="img" id="img" value="<?php echo htmlspecialchars($product['img'], ENT_QUOTES, 'UTF-8'); ?>">
             <label for="descr">Description</label>
-            <input type="text" name="descr" id="descr" value="<?php echo $product['descr']; ?>">
+            <input type="text" name="descr" id="descr" value="<?php echo htmlspecialchars($product['descr'], ENT_QUOTES, 'UTF-8'); ?>">
             <label for="stock">Stock</label>
-            <input type="text" name="stock" id="stock" value="<?php echo $product['stock']; ?>">
+            <input type="text" name="stock" id="stock" value="<?php echo htmlspecialchars($product['stock'], ENT_QUOTES, 'UTF-8'); ?>">
             <label for="variation">Variation</label>
-            <input type="text" name="variation" id="variation" value="<?php echo $product['variation']; ?>">
+            <input type="text" name="variation" id="variation" value="<?php echo htmlspecialchars($product['variation'], ENT_QUOTES, 'UTF-8'); ?>">
             <input type="submit" name="aciton" value="Edit Product">
-            <a href="deleteProduct.php?id=<?php echo $product['id']; ?>">Delete</a>
+            <a href="deleteProduct.php?id=<?php echo htmlspecialchars($product['id'], ENT_QUOTES, 'UTF-8'); ?>">Delete</a>
         </form>
     </div>
     <?php endif; ?>

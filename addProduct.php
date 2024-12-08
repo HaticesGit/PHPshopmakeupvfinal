@@ -32,23 +32,23 @@ $allProducts = Product::getAll();
 if(!empty($_POST)){
     try {
     $product = new Product();
-    $product->setTitle($_POST['title']);
-    $product->setPrice($_POST['price']);
-    $product->setImg($_POST['img']);
-    $product->setDescription($_POST['descr']);
-    $product->setStock($_POST['stock']);
-    $product->setVariation($_POST['variation']);
-    $product->setCategory_id($_POST['category_id']);
+    $product->setTitle(htmlspecialchars($_POST['title'], ENT_QUOTES, 'UTF-8'));
+    $product->setPrice(htmlspecialchars($_POST['price'], ENT_QUOTES, 'UTF-8'));
+    $product->setImg(htmlspecialchars($_POST['img'], ENT_QUOTES, 'UTF-8'));
+    $product->setDescription(htmlspecialchars($_POST['descr'], ENT_QUOTES, 'UTF-8'));
+    $product->setStock(htmlspecialchars($_POST['stock'], ENT_QUOTES, 'UTF-8'));
+    $product->setVariation(htmlspecialchars($_POST['variation'], ENT_QUOTES, 'UTF-8'));
+    $product->setCategory_id(htmlspecialchars($_POST['category_id'], ENT_QUOTES, 'UTF-8'));
     
     
     $result = $product->save();
-    echo $result;
+    echo htmlspecialchars($result, ENT_QUOTES, 'UTF-8');
     $success = "user saved!";
 }
 catch(\Throwable $th){
     //throw $th;
-    echo "dfk";
-    $error = $th->getMessage();
+    echo "error";
+    $error = htmlspecialchars($th->getMessage(), ENT_QUOTES, 'UTF-8');
 }
 }
 

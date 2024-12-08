@@ -20,7 +20,7 @@ if (!$isAdmin['admin']) {
 // }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $type = $_POST['type'];
+    $type = htmlspecialchars($_POST['type'], ENT_QUOTES, 'UTF-8');
 
     $category = new Category();
     $category->setType($type);

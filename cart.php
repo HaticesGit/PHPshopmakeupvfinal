@@ -13,12 +13,12 @@ try {
     $cartItems = $cartData['items'];
     $totalPrice = $cartData['totalPrice'];
 } catch (Exception $e) {
-    echo "Error fetching cart: " . $e->getMessage();
+    echo "Error fetching cart: " . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8');
     exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order'])) {
-    $address = trim($_POST['address']);
+    $address = htmlspecialchars(trim($_POST['address']), ENT_QUOTES, 'UTF-8');
 
     if (empty($address)) {
         $error = "Please provide a valid address.";
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order'])) {
             Product::order($userId, $address);
             header("Location: cart.php");
         } catch (Exception $e) {
-            $error = "Error placing the order: " . $e->getMessage();
+            $error = "Error placing the order: " . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8');
         }
     }
 }
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order'])) {
 <h1>Your Cart</h1>
 
     <?php if (!empty($error)): ?>
-        <p><?php echo ($error); ?></p>
+        <p><?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?></p>
     <?php endif; ?>
 
     <?php if (empty($cartItems)): ?>
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order'])) {
                 </li>
             <?php endforeach; ?>
         </ul>
-        <p><strong>Total Price:</strong> $<?php echo ($totalPrice); ?></p>
+        <p><strong>Total Price:</strong> $<?php echo htmlspecialchars($totalPrice, ENT_QUOTES, 'UTF-8'); ?></p>
     <?php endif; ?>
 
     <form action="cart.php" method="post" class="form">

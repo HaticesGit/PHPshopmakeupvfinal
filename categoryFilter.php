@@ -41,9 +41,9 @@ else{
     <li>
         <a href="productPage.php?id=<?php echo $p['id']; ?>">
             <div class="product">
-                <h2><?php echo ($p['title']); ?></h2>
-                <p><img src="<?php echo ($p['img']); ?>" alt=""> </p>
-                <p>Price: <?php echo ($p['price']); ?></p>
+                <h2><?php echo htmlspecialchars($p['title'], ENT_QUOTES, 'UTF-8'); ?></h2>
+                <p><img src="<?php echo htmlspecialchars($p['img'], ENT_QUOTES, 'UTF-8'); ?>" alt=""> </p>
+                <p>Price:  <?php echo htmlspecialchars($p['price'], ENT_QUOTES, 'UTF-8'); ?></p>
             </div>
         </a>
     <?php endforeach; ?>

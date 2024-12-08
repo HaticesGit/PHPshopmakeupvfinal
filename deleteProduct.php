@@ -15,14 +15,14 @@ if(!$isAdmin['admin']) {
     exit;
 }
 
-$product_id = isset($_GET['id']) ? $_GET['id'] : null;
+$product_id = isset($_GET['id']) ? htmlspecialchars($_GET['id'], ENT_QUOTES, 'UTF-8') : null;
 
 if($product_id){
     try {
         $product = Product::getProductById($product_id);
     }
     catch (Exception $e) {
-        die("Error fetching product: " . $e->getMessage());
+        die("Error fetching product: " . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8'));
     }
     
 }

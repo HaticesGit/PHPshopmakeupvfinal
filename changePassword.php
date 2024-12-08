@@ -10,9 +10,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($newPassword === $confirmPassword) {
         $email = $_SESSION["email"];
         User::changePassword($email, $newPassword);
-        echo "Password successfully updated!";
+        $success = "Password successfully updated!";
     } else {
-        echo "Password needs to be the same.";
+        $error = "Password needs to be the same.";
     }
 }
 ?>
@@ -32,13 +32,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             <?php if(isset($error)): ?>
             <div class="formError">
-                <p><?php echo $error; ?></p>
+                <p><?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?></p>
             </div>
             <?php endif; ?>
 
             <?php if(isset($success)): ?>
             <div class="formSuccess">
-                <p><?php echo $success; ?></p>
+                <p><?php echo htmlspecialchars($success, ENT_QUOTES, 'UTF-8'); ?></p>
             </div>
             <?php endif; ?>
 
@@ -57,6 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             <div class="formField formFieldBottom">
                 <input type="submit" value="Change Password" class="btn btn--primary">
+                <a href="login.php">Log in</a>
             </div>
         </form>
     </div>

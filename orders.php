@@ -13,7 +13,7 @@ try {
     $cartItems = $cartData['items'];
     $totalPrice = $cartData['totalPrice'];
 } catch (Exception $e) {
-    echo "Error fetching order: " . $e->getMessage();
+    echo "Error fetching order: " . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8');
     exit;
 }
 
@@ -45,7 +45,7 @@ try {
             </li>
         <?php endforeach; ?>
     </ul>
-    <p><strong>Total Price:</strong> $<?php echo ($totalPrice); ?></p>
+    <p><strong>Total Price:</strong> $<?php echo htmlspecialchars($totalPrice, ENT_QUOTES, 'UTF-8'); ?></p>
 <?php endif; ?>
 </body>
 </html>
