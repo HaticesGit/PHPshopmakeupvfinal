@@ -302,8 +302,6 @@ p{
   padding-top: 150px;
   border: 1px solid var(--brown);
   border-radius: 8px;
-  display: flex;
-  justify-content: center;
 }
 
 .product a {
