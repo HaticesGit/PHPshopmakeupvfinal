@@ -302,6 +302,11 @@ p{
   padding-top: 150px;
   border: 1px solid var(--brown);
   border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  justify-items: center;
 }
 
 .product a {
