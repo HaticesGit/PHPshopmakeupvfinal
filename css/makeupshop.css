@@ -27,6 +27,18 @@ body {
   font-family: "Poppins";
   color: var(--brown);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+body img{
+  max-width: 25%;
+}
+
+body p{
+  color: var(--brown);
 }
 
 h1{
@@ -273,5 +285,15 @@ nav {
 
 p{
   font-size: var(--text);
-  font-weight: bold;
+}
+
+#btnAddReview {
+  max-width: 50px;
+  height: 10px;
+  font-size: 12px; /* Override the font size from .btn */
+  padding: 5px 10px; /* Adjust padding for a smaller button */
+}
+
+.product{
+  padding-top: 150px;
 }
