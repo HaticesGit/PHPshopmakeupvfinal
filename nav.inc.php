@@ -18,9 +18,7 @@ $userMoney = User::viewMoney($email);
 
 ?><nav>
     <div class="leftNav">
-        <a href=""><Img></Img></a>
         <a href="index.php">Home</a>
-        <a href="">Products</a>
 
         <form action="search.php" method="get">
             <input type="text" name="search" placeholder="Search for products">
@@ -30,16 +28,13 @@ $userMoney = User::viewMoney($email);
 
     <div class="rightNav">
         <div class="navRow">
-        <a href=""><img src="" alt=""></a> <!--heart-->
-        <a href="cart.php"><img src="" alt="">Cart</a> <!--cart-->
+        <a href="cart.php"><img src="" alt="">Cart</a>
         <p>Wallet: <?php echo htmlspecialchars($userMoney['units'] ?? '0'); ?></p>
-        <a href="">Account</a>
 
         
 
         <a href="changePassword.php">Change Password</a>
         <a href="logout.php">Log Out</a>
-        <!--<a href="">Wallet : ?php echo  ?> </a>-->
         </div>
 
         
