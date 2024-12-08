@@ -39,7 +39,7 @@ error_reporting(E_ALL);
 </head>
 <body>
 <div class="formDiv">
-    <form action="" method="post">
+    <form action="" method="post" class="form">
         <h2 form__title>Sign Up</h2>
 
         <?php if(isset($error)): ?>
