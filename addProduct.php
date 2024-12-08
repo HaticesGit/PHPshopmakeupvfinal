@@ -38,6 +38,7 @@ if(!empty($_POST)){
     $product->setDescription($_POST['descr']);
     $product->setStock($_POST['stock']);
     $product->setVariation($_POST['variation']);
+    $product->setCategory_id($_POST['category_id']);
     
     
     $result = $product->save();
@@ -78,6 +79,7 @@ if (isset($_POST['title']) && isset($_POST['price'])) {
     <title>Add New Product</title>
 </head>
 <body>
+    <?php include_once("nav.inc.php"); ?>
     <h2>Add a New Product</h2>
 
     <!-- Display success message if set -->

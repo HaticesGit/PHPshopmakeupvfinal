@@ -1,6 +1,4 @@
 <?php 
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
 include_once(__DIR__ . "/bootstrap.php");
 include_once(__DIR__ . "/classes/Db.php");
 include_once(__DIR__ . "/classes/Product.php");

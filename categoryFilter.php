@@ -1,9 +1,11 @@
 <?php
 include_once(__DIR__ . "/bootstrap.php");
 include_once(__DIR__ . "/classes/Db.php");
-use Hatice\makeupshop\Db;
+
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
+
+use Hatice\makeupshop\Db;
 
 $category = isset($_GET['category']) ? $_GET['category'] : null;
 
@@ -29,7 +31,7 @@ if($category){
         <a href="productPage.php?id=<?php echo $p['id']; ?>">
             <div class="product">
                 <h2><?php echo ($p['title']); ?></h2>
-                <p><?php echo ($p['img']); ?></p>
+                <p><img src="<?php echo ($p['img']); ?>" alt=""> </p>
                 <p>Price: <?php echo ($p['price']); ?></p>
             </div>
         </a>

@@ -14,9 +14,6 @@ if (!$isAdmin['admin']) {
     exit;
 }
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 // if (!isset($_SESSION['admin']) || $_SESSION['admin'] != 1) {
 //     header('Location: index.php');
 //     exit;
@@ -37,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Add Category</title>
 </head>
 <body>
+<?php include_once("nav.inc.php"); ?>
     <h1>Add Category</h1>
     <form method="POST" action="">
         <label for="type">Category Type:</label>

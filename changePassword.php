@@ -2,8 +2,6 @@
 include_once(__DIR__ . '/bootstrap.php');
 include_once(__DIR__ . '/classes/User.php');
 use Hatice\makeupshop\User;
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $newPassword = $_POST["newPassword"];
