@@ -41,7 +41,7 @@ else{
     <li>
         <a href="productPage.php?id=<?php echo $p['id']; ?>">
             <div class="product">
-                <h2><?php echo htmlspecialchars($p['title'], ENT_QUOTES, 'UTF-8'); ?></h2>
+                <h3><?php echo htmlspecialchars($p['title'], ENT_QUOTES, 'UTF-8'); ?></h3>
                 <p><img src="<?php echo htmlspecialchars($p['img'], ENT_QUOTES, 'UTF-8'); ?>" alt=""> </p>
                 <p>Price:  <?php echo htmlspecialchars($p['price'], ENT_QUOTES, 'UTF-8'); ?></p>
             </div>
