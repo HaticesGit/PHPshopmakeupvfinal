@@ -7,7 +7,6 @@
     use Hatice\makeupshop\User;
     use Hatice\makeupshop\Review;
 
-    session_start();
     if(!empty($_POST)){
         //new review
 
