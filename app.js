@@ -23,7 +23,7 @@ document.querySelector("#btnAddReview").addEventListener("click", function() {
         document.querySelector(".reviewLI").appendChild(newReview);
     })
     .catch((error) => {
-        console.error('Error:', error);
+        console.error(error);
     });
 
 
