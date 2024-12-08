@@ -108,5 +108,9 @@ catch(\Throwable $th){
             <input type="submit" value="Add Product">
         </div>
     </form>
+    <p>1=Blush</p>
+    <p>2=Lipgloss</p>
+    <p>3=Mascara</p>
+    <p>4=Eyeshadow</p>
 </body>
 </html>
