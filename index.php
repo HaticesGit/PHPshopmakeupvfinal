@@ -1,10 +1,11 @@
 <?php
 namespace Hatice\makeupshop;
+include_once(__DIR__ . "/bootstrap.php");
 include_once(__DIR__ . "/classes/Db.php");
 include_once(__DIR__ . "/classes/Product.php");
 use Hatice\makeupshop\Db;
 use Hatice\makeupshop\Product;
-session_start(); //elke pagina da je wilt checke
+//session_start(); //elke pagina da je wilt checke
 
 if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
     header("Location: login.php");
