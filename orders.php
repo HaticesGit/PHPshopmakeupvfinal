@@ -45,7 +45,6 @@ try {
             </li>
         <?php endforeach; ?>
     </ul>
-    <p><strong>Total Price:</strong> $<?php echo htmlspecialchars($totalPrice, ENT_QUOTES, 'UTF-8'); ?></p>
 <?php endif; ?>
 </body>
 </html>
