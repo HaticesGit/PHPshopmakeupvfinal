@@ -38,10 +38,11 @@
                 $db = getenv('DB_NAME');
                 $user = getenv('DB_USER');
                 $password = getenv('DB_PASSWORD');
+                $port = getenv('DB_PORT');
 
 
                 self::$conn = new \PDO(
-                    "mysql:host=$host;dbname=$db",
+                    "mysql:host=$host;port=$port;dbname=$db",
                     $user,
                     $password,
                     $options
