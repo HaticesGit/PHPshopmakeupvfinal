@@ -15,15 +15,17 @@
     // }
 
     class Db {
-        private static $conn;
+        private static $conn = null;
         const SETTINGS = [
-            "user" => "root", 
-            "password" => "tOJmgRJtOljxohfnPqxNHWEjOUxvArYw", 
-            "host" => "junction.proxy.rlwy.net:31590/railway", 
-            "db" => "railway",
-            "ssl_ca" => __DIR__ . "/CA.pem"
-        ];
+            // "user" => "root", 
+            // "password" => "tOJmgRJtOljxohfnPqxNHWEjOUxvArYw", 
+            // "host" => "junction.proxy.rlwy.net:31590/railway", 
+            // "db" => "railway",
+             "ssl_ca" => __DIR__ . "/CA.pem"
+           
 
+        ];
+       
 
         public static function getConnection(){
         if (self::$conn === null) {
@@ -32,10 +34,16 @@
                 \PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false // For testing purposes only
             ];
             try {
+                 $host = getenv('DB_HOST');
+                $db = getenv('DB_NAME');
+                $user = getenv('DB_USER');
+                $password = getenv('DB_PASSWORD');
+
+
                 self::$conn = new \PDO(
-                    "mysql:host=".self::SETTINGS["host"].";dbname=".self::SETTINGS["db"],
-                    self::SETTINGS["user"],
-                    self::SETTINGS["password"],
+                    "mysql:host=$host;dbname=$db",
+                    $user,
+                    $password,
                     $options
                 );
             } catch (\PDOException $e) {
