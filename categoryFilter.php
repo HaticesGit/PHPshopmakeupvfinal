@@ -1,6 +1,8 @@
 <?php
 include_once(__DIR__ . "/bootstrap.php");
 include_once(__DIR__ . "/classes/Db.php");
+include_once(__DIR__ . "/classes/Product.php");
+use Hatice\makeupshop\Product;
 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
@@ -9,12 +11,19 @@ use Hatice\makeupshop\Db;
 
 $category = isset($_GET['category']) ? $_GET['category'] : null;
 
-if($category){
-    $conn = Db::getConnection();
-    $statement = $conn->prepare("SELECT * FROM products WHERE category_id = :category_id");
-    $statement->bindValue(':category_id', $category);
-    $statement->execute();
-    $product = $statement->fetchAll(\PDO::FETCH_ASSOC);
+// if($category){
+//     $conn = Db::getConnection();
+//     $statement = $conn->prepare("SELECT * FROM products WHERE category_id = :category_id");
+//     $statement->bindValue(':category_id', $category);
+//     $statement->execute();
+//     $product = $statement->fetchAll(\PDO::FETCH_ASSOC);
+// }
+if ($category) {
+    $products = Product::getProductsByCategory($category);
+}
+else{
+    //error
+    echo "No category selected";
 }
 
 ?><!DOCTYPE html>
@@ -28,7 +37,7 @@ if($category){
 </head>
 <body>
     <?php include_once("nav.inc.php"); ?>
-    <?php foreach ($product as $p): ?>
+    <?php foreach ($products as $p): ?>
     <li>
         <a href="productPage.php?id=<?php echo $p['id']; ?>">
             <div class="product">

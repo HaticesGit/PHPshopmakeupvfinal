@@ -218,9 +218,8 @@ class Product{
         } catch (\PDOException $e) {
             echo 'Connection failed: ' . $e->getMessage();
         }
-
-        
     }
+
     public function getNewProducts() {
         $conn = Db::getConnection();
         $statement = $conn->prepare("SELECT * FROM products ORDER BY dateAdded DESC LIMIT 10");
