@@ -301,8 +301,8 @@ p{
 
 .product{
   padding-top: 150px;
-  border: 1px solid var(--brown);
-  border-radius: 8px;
+  /* border: 1px solid var(--brown);
+  border-radius: 8px; */
 }
 
 .product a {
