@@ -1,8 +1,8 @@
 <?php
 namespace Hatice\makeupshop;
-require_once(__DIR__.'\bootstrap.php');
-include_once(__DIR__.'\classes\Category.php');
-include_once(__DIR__.'\classes\User.php');
+require_once(__DIR__.'/bootstrap.php');
+include_once(__DIR__.'/classes/Category.php');
+include_once(__DIR__.'/classes/User.php');
 use Hatice\makeupshop\Db;
 use Hatice\makeupshop\Category;
 

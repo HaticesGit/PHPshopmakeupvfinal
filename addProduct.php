@@ -1,7 +1,7 @@
 <?php
 namespace Hatice\makeupshop;
-require_once(__DIR__.'\bootstrap.php');
-include_once(__DIR__.'\classes\User.php');
+require_once(__DIR__.'/bootstrap.php');
+include_once(__DIR__.'/classes/User.php');
 //var_dump(file_exists(__DIR__ . "/classes/Product.php")); // Should output: bool(true)
 //var_dump(class_exists("Hatice\\makeupshop\\Product"));
 
