@@ -235,35 +235,35 @@ nav a, .filter a{
 
 nav {
   display: flex;
-  justify-content: space-between; /* Space between leftNav and rightNav */
-  align-items: center; /* Align items vertically in the middle */
-  padding: 10px 20px; /* Add some padding for spacing */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Nav shadow */
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .leftNav,
 .rightNav {
   display: flex;
-  flex-direction: row; /* Row layout for items */
-  align-items: center; /* Align items vertically */
-  gap: 15px; /* Add space between items */
+  flex-direction: row;
+  align-items: center; 
+  gap: 15px; 
 }
 
 .rightNav {
-  flex-direction: column; /* Stack AdminBar below other items */
-  align-items: flex-end; /* Align items to the right */
+  flex-direction: column; 
+  align-items: flex-end;
   width: 40%;
 }
 
 .rightNav > *:not(.AdminBar) {
-  margin-bottom: 5px; /* Add spacing between items above AdminBar */
+  margin-bottom: 5px;
 }
 
 .AdminBar {
   display: flex;
-  flex-direction: row; /* AdminBar items in a row */
-  gap: 10px; /* Spacing between admin links */
-  margin-top: 10px; /* Add spacing above AdminBar */
+  flex-direction: row;
+  gap: 10px; 
+  margin-top: 10px;
   justify-content: flex-end;
   padding: 10px 5px;
   margin: 5px 10px;
@@ -294,8 +294,8 @@ p{
 #btnAddReview {
   max-width: 50px;
   height: 10px;
-  font-size: 12px; /* Override the font size from .btn */
-  padding: 5px 10px; /* Adjust padding for a smaller button */
+  font-size: 12px;
+  padding: 5px 10px; 
 }
 
 .product{
