@@ -188,9 +188,9 @@ class Product{
         $successMessage = true;
 
         if ($result) {
-            echo "yippee";
+            echo "Product added successfully!";
         } else {
-            echo "o no";
+            echo "It looks like something went wrong. Please try again.";
         }
 
         return $result;
