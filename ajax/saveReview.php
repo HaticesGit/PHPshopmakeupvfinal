@@ -1,5 +1,5 @@
 <?php
-    include_once(__DIR__ . "/bootstrap.php");
+    include_once(__DIR__ . "/../bootstrap.php");
     include_once(__DIR__ . "/../classes/Db.php");
     include_once(__DIR__ . "/../classes/Review.php");
     include_once(__DIR__ . "/../classes/User.php");
