@@ -1,24 +1,4 @@
 <?php
-	// function canLogIn($p_email, $p_password){ //p voor parameter, kan eender wat noemn
-	// 	$conn = new PDO('mysql:dbname=makeupshop;host=localhost', "root", "root");
-	// 	$statement = $conn->prepare('SELECT * FROM users WHERE email = :email'); //?
-	// 	$statement->bindValue(':email', $p_email); // bindvalue?
-	// 	$statement->execute();
-	// 	$user = $statement->fetch(PDO::FETCH_ASSOC); //?
-	// 	if($user){
-	// 		$hash = $user['password'];
-	// 		if(password_verify($p_password, $hash)){
-	// 			return true;
-	// 		}
-	// 		else{
-	// 			return false;
-	// 		}
-	// 	}
-	// 	else{
-	// 		//not found
-	// 		return false;
-	// 	}
-	// }
 	include_once('classes/User.php');
 	use Hatice\makeupshop\User;
 

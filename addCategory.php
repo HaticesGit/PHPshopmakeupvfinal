@@ -14,11 +14,6 @@ if (!$isAdmin['admin']) {
     exit;
 }
 
-// if (!isset($_SESSION['admin']) || $_SESSION['admin'] != 1) {
-//     header('Location: index.php');
-//     exit;
-// }
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $type = htmlspecialchars($_POST['type'], ENT_QUOTES, 'UTF-8');
 

@@ -52,25 +52,6 @@ catch(\Throwable $th){
 }
 }
 
-/*if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
-    header("Location: login.php");
-    exit;
-}
-
-if (isset($_POST['title']) && isset($_POST['price'])) {
-    $title = $_POST['title'];
-    $price = $_POST['price'];
-
-    $conn = new PDO('mysql:dbname=makeupshop;host=localhost', "root", "root");
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    $statement = $conn->prepare("INSERT INTO products (title, price) VALUES (:title, :price)");
-    $statement->bindValue(':title', $title);
-    $statement->bindValue(':price', $price);
-    $statement->execute();
-
-    $successMessage = "Product successfully added!";
-}*/
 ?><!DOCTYPE html>
 <html lang="en">
 <head>

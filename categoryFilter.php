@@ -11,13 +11,6 @@ use Hatice\makeupshop\Db;
 
 $category = isset($_GET['category']) ? $_GET['category'] : null;
 
-// if($category){
-//     $conn = Db::getConnection();
-//     $statement = $conn->prepare("SELECT * FROM products WHERE category_id = :category_id");
-//     $statement->bindValue(':category_id', $category);
-//     $statement->execute();
-//     $product = $statement->fetchAll(\PDO::FETCH_ASSOC);
-// }
 if ($category) {
     $products = Product::getProductsByCategory($category);
 }

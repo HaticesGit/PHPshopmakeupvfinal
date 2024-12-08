@@ -10,12 +10,6 @@ $email = $_SESSION['email'];
 $isAdmin = User::adminCheck($email);
 $userMoney = User::viewMoney($email);
 
-// if(!empty ($_GET['search'])){
-//     $search = $_GET['search'];
-//     header("Location: search.php?search=$search");
-//     exit;
-// }
-
 ?><nav>
     <div class="leftNav">
         <a href="index.php">Home</a>
