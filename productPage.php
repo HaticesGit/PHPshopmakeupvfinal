@@ -12,7 +12,7 @@ use Hatice\makeupshop\Product;
 $userId = User::getByEmail($_SESSION["email"])['id'];
 $email = $_SESSION['email'];
 $isAdmin = User::adminCheck($email);
-$product_id = isset($_GET['id']) ? htmlspecialchars($_GET['id'], ENT_QUOTES, 'UTF-8') : null;
+$product_id = isset($_GET['id']) ? $_GET['id'] : null;
 $allReviews = Review::getAll($product_id);
 
 $canReview = Review::hasOrderedProduct($userId, $product_id);
