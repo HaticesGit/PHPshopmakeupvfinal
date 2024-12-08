@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addToCart'])) {
     <?php endif; ?>
     <ul class="reviewLI">
         <?php foreach ($allReviews as $review): ?>
-            <li><?php echo htmlspecialchars($review['text']); ?></li>
+            <li><?php echo $review['text']; ?></li>
         <?php endforeach; ?>
     </ul>
     </div>
