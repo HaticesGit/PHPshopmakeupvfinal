@@ -40,6 +40,7 @@ body img{
 
 body p{
   color: var(--brown);
+  font-weight: bold;
 }
 
 h1{
