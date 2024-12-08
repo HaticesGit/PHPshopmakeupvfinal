@@ -199,9 +199,9 @@ class Product{
 
     public static function getAll(){ //new
         try {
-            //$conn = Db::getConnection();
-            $pdo = new \PDO('mysql:host=localhost;dbname=makeupshop', 'root', 'root');
-            $statement = $pdo->query('SELECT * FROM products');
+            $conn = Db::getConnection();
+            //$pdo = new \PDO('mysql:host=localhost;dbname=makeupshop', 'root', 'root');
+            $statement = $conn->query('SELECT * FROM products');
             return $statement->fetchAll(\PDO::FETCH_ASSOC);
         } catch (\PDOException $e) {
             echo 'Connection failed: ' . $e->getMessage();
@@ -210,8 +210,8 @@ class Product{
 
     public static function getProductsByCategory($category_id) {
         try {
-            $pdo = new \PDO('mysql:host=localhost;dbname=makeupshop', 'root', 'root');
-            $statement = $pdo->prepare('SELECT * FROM products WHERE category_id = :category_id');
+            $conn = Db::getConnection();
+            $statement = $conn->prepare('SELECT * FROM products WHERE category_id = :category_id');
             $statement->bindParam(':category_id', $category_id);
             $statement->execute();
             return $statement->fetchAll(\PDO::FETCH_ASSOC);

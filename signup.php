@@ -1,6 +1,8 @@
 <?php
 include_once(__DIR__ . "/classes/User.php");
 use Hatice\makeupshop\User;
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
     if(!empty($_POST)){
         $email = $_POST["email"];

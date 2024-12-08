@@ -141,7 +141,7 @@ if(User::canLogin($email, $password))*/
 
     public static function getAll(){ //new
         $conn = Db::getConnection();
-        $conn = new PDO('mysql:dbname=makeupshop;host=localhost', "root", "root"); 
+        //$conn = new PDO('mysql:dbname=makeupshop;host=localhost', "root", "root"); 
         $statement = $conn->query('SELECT * FROM users');
         return $statement->fetchAll(PDO::FETCH_ASSOC);
 

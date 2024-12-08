@@ -13,9 +13,10 @@ $pathToSSL = __DIR__ . "/CA.pem";
     
 $conn = Db::getConnection(); //hier was PDO
 //select * from products and fetch as array
-$statement = $conn->prepare("SELECT * FROM products");
-$statement->execute();
-$products = $statement->fetchAll(\PDO::FETCH_ASSOC);
+$products = Product::getAll();
+// $statement = $conn->prepare("SELECT * FROM products");
+// $statement->execute();
+// $products = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
 $product = new Product();
 $newProducts = $product->getNewProducts();

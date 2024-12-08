@@ -47,8 +47,9 @@ class Category {
     }
     public function addCategory($type) {
         try {
-            $pdo = new \PDO('mysql:host=localhost;dbname=makeupshop', 'root', 'root');
-            $statement = $pdo->prepare('INSERT INTO category (type) VALUES (:type)');
+            $conn = Db::getConnection();
+            //$pdo = new \PDO('mysql:host=localhost;dbname=makeupshop', 'root', 'root');
+            $statement = $conn->prepare('INSERT INTO category (type) VALUES (:type)');
             $statement->bindValue(":type", $this->type);
             $statement->execute();
             return $statement;
