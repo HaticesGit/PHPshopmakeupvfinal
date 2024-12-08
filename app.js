@@ -1,4 +1,5 @@
-document.querySelector("#btnAddReview").addEventListener("click", function() {
+document.querySelector("#btnAddReview").addEventListener("click", function(event) {
+    event.preventDefault();
     //productid
     //comment text;
     let productId = this.dataset.productid;
