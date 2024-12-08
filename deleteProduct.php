@@ -5,6 +5,7 @@ include_once(__DIR__ . "/classes/Product.php");
 include_once(__DIR__ . "/classes/User.php");
 use Hatice\makeupshop\User;
 use Hatice\makeupshop\Db;
+use Hatice\makeupshop\Product;
 
 $email = $_SESSION['email'];
 $isAdmin = User::adminCheck($email);
@@ -36,7 +37,7 @@ else {
 
 if(isset($_POST['Delete'])){
     $id = $_POST['id'];
-    User::deleteProduct($id);
+    Product::deleteProduct($id);
     header("Location: index.php");
     exit;
 }

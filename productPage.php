@@ -44,7 +44,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['aciton'])){
     $stock = $_POST['stock'];
     $variation = $_POST['variation'];
 
-    User::editProduct($id, $title, $price, $img, $descr, $stock, $variation);
+    Product::editProduct($id, $title, $price, $img, $descr, $stock, $variation);
     //show feedback
     header("Location: index.php");
     exit;
