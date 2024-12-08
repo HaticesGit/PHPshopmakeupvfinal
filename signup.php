@@ -4,28 +4,30 @@ use Hatice\makeupshop\User;
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-    if(!empty($_POST)){
-        $email = htmlspecialchars($_POST["email"], ENT_QUOTES, 'UTF-8');
-        $password = htmlspecialchars($_POST["password"], ENT_QUOTES, 'UTF-8');
+if(!empty($_POST)){
+    $email = htmlspecialchars($_POST["email"], ENT_QUOTES, 'UTF-8');
+    $password = htmlspecialchars($_POST["password"], ENT_QUOTES, 'UTF-8');
 
+    if (empty($email)) {
+        $error = "Email cannot be empty.";
+    } else {
         $user = User::canLogin($email, $password);
         if ($user) {
             $error = "This email is already in use. Please choose another one.";
-        } 
+        } else {
+            $options = [
+                'cost' => 12,
+            ];
+            $hash = password_hash($password, PASSWORD_DEFAULT, $options);
         
-        else {
-        $options = [
-            'cost' => 12,
-        ];
-        $hash = password_hash($password, PASSWORD_DEFAULT, $options);
-    
-        $newUser = new User();
-        $newUser->setEmail($email);
-        $newUser->setPassword($hash);
-        $newUser->save();
+            $newUser = new User();
+            $newUser->setEmail($email);
+            $newUser->setPassword($hash);
+            $newUser->save();
 
-        header('Location: index.php');
+            header('Location: index.php');
         }
+    }
     }
 
 ?><!DOCTYPE html>
