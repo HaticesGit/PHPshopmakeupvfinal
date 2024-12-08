@@ -23,7 +23,7 @@
         // }
         $review = new Review();
         $review->setProduct_id($_POST['product_id']);
-        $review->setText(htmlspecialchars($_POST['text'], ENT_QUOTES, 'UTF-8'));
+        $review->setText($_POST['text']);
         $review->setUser_id($userId);
         //save
         $review->saveReview();
