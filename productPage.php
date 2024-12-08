@@ -1,6 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
 include_once(__DIR__ . "/bootstrap.php");
 include_once(__DIR__ . "/classes/Db.php");
 include_once(__DIR__ . "/classes/Product.php");
@@ -16,7 +14,6 @@ $email = $_SESSION['email'];
 $isAdmin = User::adminCheck($email);
 $product_id = isset($_GET['id']) ? $_GET['id'] : null;
 $allReviews = Review::getAll($product_id);
-var_dump($allReviews);
 
 $canReview = Review::hasOrderedProduct($userId, $product_id);
 
@@ -78,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addToCart'])) {
 
     <div class="product">
         <h2><?php echo ($product['title']); ?></h2>
-        <p><?php echo ($product['img']); ?></p>
+        <img src="<?php echo ($product['img']); ?>" alt="">
         <p>Price: <?php echo ($product['price']); ?></p>
         <p><?php echo ($product['descr']); ?></p>
         <p>Stock: <?php echo ($product['stock']); ?></p>

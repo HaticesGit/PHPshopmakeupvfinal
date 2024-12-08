@@ -1,14 +1,10 @@
 <?php
 namespace Hatice\makeupshop;
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
 include_once(__DIR__ . "/classes/Db.php");
 include_once(__DIR__ . "/classes/Product.php");
 use Hatice\makeupshop\Db;
 use Hatice\makeupshop\Product;
 session_start(); //elke pagina da je wilt checke
-
-var_dump($_SESSION);
 
 if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
     header("Location: login.php");
@@ -48,7 +44,7 @@ $newProducts = $product->getNewProducts();
             <a href="productPage.php?id=<?php echo $product['id']; ?>">
                 <div class="product">
                     <h2><?php echo ($product['title']); ?></h2>
-                    <p><?php echo ($product['img']); ?></p>
+                    <img src="<?php echo ($product['img']); ?>" alt="">
                     <p>Price: <?php echo ($product['price']); ?></p>
                 </div>
             </a>
