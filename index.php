@@ -26,6 +26,7 @@ $newProducts = $product->getNewProducts();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home page</title>
+    <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/makeupshop.css">
 </head>
 <body>
@@ -38,37 +39,41 @@ $newProducts = $product->getNewProducts();
     </div>
 
     <article class="display">
-        <div class="newsfeed">
-            <h3>New!</h3>
+        <h2>New!</h3>
+        <div class="newsfeed displayDiv">
+            
             <?php foreach ($newProducts as $product): ?>
-            <li>
-            <a href="productPage.php?id=<?php echo $product['id']; ?>">
-                <div class="product">
-                    <h2><?php echo ($product['title']); ?></h2>
-                    <img src="<?php echo ($product['img']); ?>" alt="">
-                    <p>Price: <?php echo ($product['price']); ?></p>
-                </div>
-            </a>
-            </li>
-        <?php endforeach; ?>
-            <div class="newsfeedInfo">
-            <h3>Your fave blush just got a bronzer bestie!</h3>
-            <p>Get even more long-lasting Camo color with NEW Camo Liquid Bronzer & Contour + 3 NEW shades of Liquid Blush. Only $7 each.</p>
-            <a href="">Shop</a>
+                <li>
+                    <a href="productPage.php?id=<?php echo $product['id']; ?>">
+                        <div class="product">
+                            <h3><?php echo ($product['title']); ?></h2>
+                            <img src="<?php echo ($product['img']); ?>" alt="">
+                            <p>Price: <?php echo ($product['price']); ?></p>
+                        </div>
+                    </a>
+                </li>
+            <?php endforeach; ?>
         </div>
-        <?php foreach($products as $product): ?>
-        <article>
-        <li>
-            <a href="productPage.php?id=<?php echo $product['id']; ?>">
-                <div class="product">
-                    <h2><?php echo ($product['title']); ?></h2>
-                    <p><?php echo ($product['img']); ?></p>
-                    <p>Price: <?php echo ($product['price']); ?></p>
-                </div>
-            </a>
-            </li>
-        </article>
-        <?php endforeach; ?>
+        
+
+        <!-- <article class="display">
+            <h2>Our Products</h3>
+            <div class="displayDiv">
+                
+                <?php foreach($products as $product): ?>
+                    <li>
+                        <a href="productPage.php?id=<?php echo $product['id']; ?>">
+                            <div class="product">
+                                <h3><?php echo ($product['title']); ?></h2>
+                                <img src="<?php echo ($product['img']); ?>" alt="">
+                                <p>Price: <?php echo ($product['price']); ?></p>
+                            </div>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </div>
+        </article> -->
+        
     </article>
 </body>
 </html>

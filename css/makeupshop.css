@@ -14,7 +14,7 @@
     --h1: 40px;
     --h2: 32px;
     --h3: 20px;
-    --text: 12px;
+    --text: 16px;
     --minitext: 8px;
     --btn: 24px;
   }
@@ -120,4 +120,158 @@ border-radius: 8px;
 .link a{
   text-decoration: none;
   color: var(--brown);
+}
+
+.newsfeed.displayDiv {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  align-content: flex-start;
+  align-self: center;
+  margin: 0;
+  padding: 20px;
+  width: 100%;
+  
+  margin: 10px;
+  padding: 10px;
+  box-shadow: 0px 0px 10px #c7c7c7; 
+  max-width: 100%;
+  border-radius: 16px;
+  gap: 16px;
+}
+
+.rows{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  align-self: center;
+  margin: 0;
+  list-style-type: none;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+
+.display{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  align-self: center;
+  margin: 0;
+  list-style-type: none;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.displayDiv{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  align-self: center;
+  margin: 0;
+  padding: 20px;
+  flex-wrap: wrap;
+  margin: 10px;
+  padding: 10px;
+  box-shadow: 0px 0px 10px #c7c7c7; 
+  max-width: 100%;
+  border-radius: 16px;
+}
+
+.displayDiv img{
+  max-width: 25%;
+}
+
+.displayDiv a{
+  text-decoration: none;
+  color: var(--pink);
+}
+
+nav{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  align-content: center;
+  align-self: center;
+  margin: 0;
+  padding: 20px;
+  width: 100%;
+}
+
+nav a, .filter a{
+  text-decoration: none;
+  color: var(--brown);
+  font-weight: bold;
+}
+
+.filter a {
+  padding: 20px;
+  /* border: 1px solid var(--brown);
+  border-radius: 8px; */
+}
+
+nav {
+  display: flex;
+  justify-content: space-between; /* Space between leftNav and rightNav */
+  align-items: center; /* Align items vertically in the middle */
+  padding: 10px 20px; /* Add some padding for spacing */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Nav shadow */
+}
+
+.leftNav,
+.rightNav {
+  display: flex;
+  flex-direction: row; /* Row layout for items */
+  align-items: center; /* Align items vertically */
+  gap: 15px; /* Add space between items */
+}
+
+.rightNav {
+  flex-direction: column; /* Stack AdminBar below other items */
+  align-items: flex-end; /* Align items to the right */
+  width: 40%;
+}
+
+.rightNav > *:not(.AdminBar) {
+  margin-bottom: 5px; /* Add spacing between items above AdminBar */
+}
+
+.AdminBar {
+  display: flex;
+  flex-direction: row; /* AdminBar items in a row */
+  gap: 10px; /* Spacing between admin links */
+  margin-top: 10px; /* Add spacing above AdminBar */
+  justify-content: flex-end;
+}
+
+.AdminBar a{
+  text-decoration: none;
+  color: var(--brown);
+  font-weight: bold;
+}
+
+.navRow{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  align-content: center;
+  align-self: center;
+  margin: 0;
+  padding: 20px;
+  width: 100%;
+}
+
+p{
+  font-size: var(--text);
+  font-weight: bold;
 }

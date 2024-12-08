@@ -77,6 +77,8 @@ if (isset($_POST['title']) && isset($_POST['price'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add New Product</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/makeupshop.css">
 </head>
 <body>
     <?php include_once("nav.inc.php"); ?>
