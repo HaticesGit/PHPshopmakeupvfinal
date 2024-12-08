@@ -351,5 +351,13 @@ class Product{
         $query->bindValue(":id", $id);
         $query->execute();
     }
+
+    public static function getProductById($id) {
+        $conn = Db::getConnection();
+        $query = $conn->prepare("SELECT * FROM products WHERE id = :id");
+        $query->bindValue(':id', $id, \PDO::PARAM_INT);
+        $query->execute();
+        return $query->fetch(\PDO::FETCH_ASSOC);
+    }
     
 }

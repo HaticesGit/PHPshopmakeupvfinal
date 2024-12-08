@@ -19,11 +19,7 @@ $product_id = isset($_GET['id']) ? $_GET['id'] : null;
 
 if($product_id){
     try {
-        $conn = Db::getConnection();
-        $statement = $conn->prepare("SELECT * FROM products WHERE id = :product_id");
-        $statement->bindValue(':product_id', $product_id, \PDO::PARAM_INT);
-        $statement->execute();
-        $product = $statement->fetch(\PDO::FETCH_ASSOC);
+        $product = Product::getProductById($product_id);
     }
     catch (Exception $e) {
         die("Error fetching product: " . $e->getMessage());
